@@ -14,6 +14,14 @@ def at_validator():
             print("You need to have one @ in your email address")
 
 
+def empty_address(address):
+    username, domain = address.split("@")
+    if username == "":
+        print("You must enter a username")
+    if domain == "":
+        print("You must enter a domain")
+
+
 def special_char_validator(address):
     if "@" in address:
         username, domain = address.split("@")
@@ -32,19 +40,30 @@ def special_char_validator(address):
     return True
 
 
-def empty_address(address):
+def domain_dot_validator(address):
     username, domain = address.split("@")
-    if username == "":
-        print("You must enter a username")
-    if domain == "":
-        print("You must enter a domain")
+    if '.' in domain:
+        beforedot, afterdot = domain.split(".")
+        if beforedot == "upcmail":
+            print("upcmail no longer exists :(")
+        elif beforedot == "gmail" or beforedot == "hotmail" or beforedot == "freemail":
+            if afterdot == "hu" or afterdot == "com" or afterdot == "de":
+                print("Thank you for your subscription")
+                return True
+            else:
+                print(f"{afterdot} is not a valid ending for an email address")
+        else:
+            print(f"{beforedot} is not a valid email address")
+    else:
+        print("You need to have a . in the domain part of you email address")
 
 
 def main():
     while True:
         email = at_validator()
         empty_address(email)
-        if special_char_validator(email):
+        special_char_validator(email)
+        if domain_dot_validator(email):
             break
 
 
