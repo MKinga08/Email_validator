@@ -25,17 +25,17 @@ def empty_address(address):
 def special_char_validator(address):
     if "@" in address:
         username, domain = address.split("@")
-        c, k = 0, 0
-        s = r"[@_!#$%^&*()<>?/\}{~:|]"
+        counter1, counter2 = 0, 0
+        special_characters = r"[@_!#$%^&*()<>?/\}{~:|]"
         for i in range(len(username)):
-            if username[i] in s:
-                c += 1
-        if c > 0:
+            if username[i] in special_characters:
+                counter1 += 1
+        if counter1 > 0:
             print("username should not contain any special characters")
         for j in range(len(domain)):
-            if domain[j] in s:
-                k += 1
-        if k > 0:
+            if domain[j] in special_characters:
+                counter2 += 1
+        if counter2 > 0:
             print("domain should not contain any special characters")
     return True
 
