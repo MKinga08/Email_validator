@@ -17,30 +17,33 @@ def at_validator():
 def special_char_validator(address):
     if "@" in address:
         username, domain = address.split("@")
-        if username == "":
-            print("You must enter a username")
-        if domain == "":
-            print("You must enter a domain")
-        c = 0
-        s = "[@_!#$%^&*()<>?/}{~:|]"
+        c, k = 0, 0
+        s = r"[@_!#$%^&*()<>?/\}{~:|]"
         for i in range(len(username)):
             if username[i] in s:
                 c += 1
         if c > 0:
             print("username should not contain any special characters")
-        k = 0
-        sp = "[@_!#$%^&*()<>?/}{~:|]"
         for j in range(len(domain)):
-            if domain[j] in sp:
+            if domain[j] in s:
                 k += 1
         if k > 0:
             print("domain should not contain any special characters")
     return True
 
 
+def empty_address(address):
+    username, domain = address.split("@")
+    if username == "":
+        print("You must enter a username")
+    if domain == "":
+        print("You must enter a domain")
+
+
 def main():
     while True:
         email = at_validator()
+        empty_address(email)
         if special_char_validator(email):
             break
 
